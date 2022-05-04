@@ -1,19 +1,20 @@
-class MyExept:
-    def __init__(self,a,b):
-        self.a = a
-        self.b = b
-    def div(a,b):
-        try:
-            res=a/b
-        except:
-            if b ==0:
-                print("Деление на ноль недопустимо")
+class MyExept(Exception):
+    def __init__(self,txt):
+        self.txt = txt
+
+
+def div(a, b):
+    try:
+        if b == 0:
+            raise MyExept("Делить на ноль нельзя!")
+            return ''
         else:
-            print(f"Все хорошо. Результат = {res}")
-        finally:
             print("Программа завершена")
-        return ''
+            return a / b
+    except MyExept as err:
+        return err
+
 
 a1 = float(input("Введите делимое:"))
 b1 = float(input("Введите делитель:"))
-print(MyExept.div(a1,b1))
+print(div(a1,b1))
